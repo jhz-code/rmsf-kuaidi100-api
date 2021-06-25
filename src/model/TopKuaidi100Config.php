@@ -7,7 +7,7 @@
  */
 
 
-namespace RmTop\RmKuaidi100\model;
+namespace RmTop\RmKuaidi100\core\model;
 
 
 use think\Model;
