@@ -7,12 +7,12 @@
  */
 
 
-namespace RmTop\RmKuaidi100\core\model;
+namespace RmTop\RmKuaidi100\model;
 
 
 use think\Model;
 
-class TopKuaidi100Config extends Model
+class TopKuaidi100ConfigModel extends Model
 {
 
 
