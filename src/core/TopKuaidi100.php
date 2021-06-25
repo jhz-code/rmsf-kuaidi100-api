@@ -13,6 +13,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use RmTop\RmKuaidi100\lib\TopSign;
 use RmTop\RmKuaidi100\lib\TopParams;
 use RmTop\RmKuaidi100\lib\TopPrinter;
+use RmTop\RmKuaidi100\model\TopKuaidi100ConfigModel;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
@@ -26,12 +27,11 @@ use think\db\exception\ModelNotFoundException;
 class TopKuaidi100
 {
 
-    protected array $config;
+    protected  $printer;
 
-
-    public function __construct($cloudStoreId,string $position)
+    public function __construct($configId)
     {
-      $this->config = [];
+      $this->printer = TopKuaidi100ConfigModel::where(['id'=>$configId])->find();
     }
 
 
@@ -49,10 +49,10 @@ class TopKuaidi100
         $TIME = time();
         $TopClient->setParams([
             'method'=>"printOld",
-            'key'=>$this->config['appKey'],
+            'key'=>$this->printer['config']['appKey'],
             't'=>$TIME,
             'param'=>TopParams::getParams($params),
-            'sign'=>TopSign::create_sign(TopParams::getParams($params),$TIME,$this->config['appKey'],$this->config['appSecret']),
+            'sign'=>TopSign::create_sign(TopParams::getParams($params),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
         ]);
         return  $TopClient->TopPrint();
     }
@@ -75,10 +75,10 @@ class TopKuaidi100
         $TIME = time();
         $TopClient->setParams([
             'method'=>"imgOrder",
-            'key'=>$this->config['appKey'],
+            'key'=>$this->printer['config']['appKey'],
             't'=>$TIME,
             'param'=>TopParams::getParams($params),
-            'sign'=>TopSign::create_sign(TopParams::getParams($params),$TIME,$this->config['appKey'],$this->config['appSecret']),
+            'sign'=>TopSign::create_sign(TopParams::getParams($params),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
             'file'=>$file
         ]);
         return  $TopClient->TopPrint();
@@ -100,10 +100,10 @@ class TopKuaidi100
         $TIME = time();
         $TopClient->setParams([
             'method'=>"getPrintImg",
-            'key'=>$this->config['appKey'],
+            'key'=>$this->printer['config']['appKey'],
             't'=>$TIME,
             'param'=>TopParams::getParams($params),
-            'sign'=>TopSign::create_sign(TopParams::getParams($params),$TIME,$this->config['appKey'],$this->config['appSecret']),
+            'sign'=>TopSign::create_sign(TopParams::getParams($params),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
         ]);
         return  $TopClient->TopPrint();
     }
@@ -124,10 +124,10 @@ class TopKuaidi100
         $TIME = time();
         $TopClient->setParams([
             'method'=>"printOld",
-            'key'=>$this->config['appKey'],
+            'key'=>$this->printer['config']['appKey'],
             't'=>$TIME,
             'param'=>TopParams::getParams(['taskId'=>$taskId]),
-            'sign'=>TopSign::create_sign(TopParams::getParams(['taskId'=>$taskId]),$TIME,$this->config['appKey'],$this->config['appSecret']),
+            'sign'=>TopSign::create_sign(TopParams::getParams(['taskId'=>$taskId]),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
         ]);
         return  $TopClient->TopPrint();
     }
@@ -148,10 +148,10 @@ class TopKuaidi100
         $TIME = time();
         $TopClient->setParams([
             'method'=>"devstatus",
-            'key'=>$this->config['appKey'],
+            'key'=>$this->printer['config']['appKey'],
             't'=>$TIME,
             'param'=>TopParams::getParams(['siid'=>$siid]),
-            'sign'=>TopSign::create_sign(TopParams::getParams(['siid'=>$siid]),$TIME,$this->config['appKey'],$this->config['appSecret']),
+            'sign'=>TopSign::create_sign(TopParams::getParams(['siid'=>$siid]),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
         ]);
         return  $TopClient->TopPrint();
     }
