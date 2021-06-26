@@ -16,7 +16,6 @@ use RmTop\RmKuaidi100\lib\TopSign;
 use RmTop\RmKuaidi100\lib\TopParams;
 use RmTop\RmKuaidi100\lib\TopPrinter;
 use RmTop\RmKuaidi100\lib\TopThirdPrinter;
-use RmTop\RmKuaidi100\model\TopKuaidi100ConfigModel;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
@@ -53,6 +52,7 @@ class TopKuaidi100
         $TopClient = new TopPrinter();
         list($msec, $sec) = explode(' ', microtime());
         $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
+        $params['siid'] = $this->printer['printer']['siid'];
         $TopClient->setParams([
             'method'=>"eOrder",
             'key'=>$this->printer['config']['appKey'],
@@ -160,6 +160,7 @@ class TopKuaidi100
         $TopClient = new TopPrinter();
         list($msec, $sec) = explode(' ', microtime());
         $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
+        $params['siid'] = $this->printer['printer']['siid'];
         $TopClient->setParams([
             'method'=>"printOld",
             'key'=>$this->printer['config']['appKey'],
@@ -186,6 +187,7 @@ class TopKuaidi100
         $TopClient = new TopPrinter();
         list($msec, $sec) = explode(' ', microtime());
         $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
+        $params['siid'] = $this->printer['printer']['siid'];
         $TopClient->setParams([
             'method'=>"imgOrder",
             'key'=>$this->printer['config']['appKey'],
@@ -252,14 +254,13 @@ class TopKuaidi100
 
     /**
      * 获取打印机状态
-     * @param string $siid
      * @return array
      * @throws DataNotFoundException
      * @throws DbException
      * @throws GuzzleException
      * @throws ModelNotFoundException
      */
-    function printerState(string $siid): array
+    function printerState(): array
     {
         $TopClient = new TopPrinter();
         list($msec, $sec) = explode(' ', microtime());
@@ -268,8 +269,8 @@ class TopKuaidi100
             'method'=>"devstatus",
             'key'=>$this->printer['config']['appKey'],
             't'=>$TIME,
-            'param'=>TopParams::getParams(['siid'=>$siid]),
-            'sign'=>TopSign::create_sign(TopParams::getParams(['siid'=>$siid]),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
+            'param'=>TopParams::getParams(['siid'=>$this->printer['printer']['siid']]),
+            'sign'=>TopSign::create_sign(TopParams::getParams(['siid'=>$this->printer['printer']['siid']]),$TIME,$this->printer['config']['appKey'],$this->printer['config']['appSecret']),
         ]);
         return  $TopClient->TopPrint();
     }
@@ -314,7 +315,8 @@ class TopKuaidi100
      * @throws GuzzleException
      * @throws ModelNotFoundException
      */
-    function getThirdInfo($params){
+    function getThirdInfo($params): array
+    {
         $TopClient = new TopEPrinter();
         list($msec, $sec) = explode(' ', microtime());
         $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
