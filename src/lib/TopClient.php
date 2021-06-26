@@ -37,10 +37,9 @@ class TopClient
         $tapMiddleware = Middleware::tap(function ($request) {
         });
         $result = $client->request('POST', $this->apiUrl, [
-            'http_errors' => false,
-            'headers' => [ 'Accept' => 'application/x-www-form-urlencoded','User-Agent' => 'rmtop'],
+            'headers' => ['User-Agent' => 'rmtop'],
             'handler' => $tapMiddleware($clientHandler),
-            'json' => $this->params,
+            'form_params' => $this->params,
         ]);
         $res['StatusCode'] = $result->getStatusCode();
         $res['ReasonPhrase'] = $result->getReasonPhrase();
