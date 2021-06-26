@@ -47,7 +47,8 @@ class TopKuaidi100
     function printOrder($params): array
     {
         $TopClient = new TopPrinter();
-        $TIME = time();
+        list($msec, $sec) = explode(' ', microtime());
+        $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
         $TopClient->setParams([
             'method'=>"printOld",
             'key'=>$this->printer['config']['appKey'],
@@ -57,7 +58,6 @@ class TopKuaidi100
         ]);
         return  $TopClient->TopPrint();
     }
-
 
     /**
      * 二、附件打印接口
@@ -73,7 +73,8 @@ class TopKuaidi100
     function printImgOrder($params,$file): array
     {
         $TopClient = new TopPrinter();
-        $TIME = time();
+        list($msec, $sec) = explode(' ', microtime());
+        $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
         $TopClient->setParams([
             'method'=>"imgOrder",
             'key'=>$this->printer['config']['appKey'],
@@ -99,7 +100,8 @@ class TopKuaidi100
     function getPrintImg($params): array
     {
         $TopClient = new TopPrinter();
-        $TIME = time();
+        list($msec, $sec) = explode(' ', microtime());
+        $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
         $TopClient->setParams([
             'method'=>"getPrintImg",
             'key'=>$this->printer['config']['appKey'],
@@ -123,7 +125,8 @@ class TopKuaidi100
     function repeatPrintOld($taskId): array
     {
         $TopClient = new TopPrinter();
-        $TIME = time();
+        list($msec, $sec) = explode(' ', microtime());
+        $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
         $TopClient->setParams([
             'method'=>"printOld",
             'key'=>$this->printer['config']['appKey'],
@@ -147,7 +150,8 @@ class TopKuaidi100
     function printerState(string $siid): array
     {
         $TopClient = new TopPrinter();
-        $TIME = time();
+        list($msec, $sec) = explode(' ', microtime());
+        $TIME = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);    //当前时间戳
         $TopClient->setParams([
             'method'=>"devstatus",
             'key'=>$this->printer['config']['appKey'],

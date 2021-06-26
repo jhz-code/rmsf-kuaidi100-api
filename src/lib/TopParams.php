@@ -6,10 +6,8 @@ namespace RmTop\RmKuaidi100\lib;
 
 class TopParams
 {
-
-  static  function  getParams(array $params): array
-  {
-       return array_filter($params);
-   }
-
+    static  function  getParams(array $params)
+    {
+        return  json_encode($params, JSON_UNESCAPED_UNICODE);
+    }
 }
