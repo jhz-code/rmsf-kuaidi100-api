@@ -10,6 +10,7 @@ namespace RmTop\RmKuaidi100\core;
 
 
 use GuzzleHttp\Exception\GuzzleException;
+use RmTop\RmKuaidi100\lib\TopKuaidi100Manage;
 use RmTop\RmKuaidi100\lib\TopSign;
 use RmTop\RmKuaidi100\lib\TopParams;
 use RmTop\RmKuaidi100\lib\TopPrinter;
@@ -31,7 +32,7 @@ class TopKuaidi100
 
     public function __construct($configId)
     {
-      $this->printer = TopKuaidi100ConfigModel::where(['id'=>$configId])->find();
+      $this->printer = TopKuaidi100Manage::getConfig($configId);
     }
 
 

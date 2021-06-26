@@ -134,10 +134,10 @@ class TopKuaidi100Manage
      * @throws DbException
      * @throws ModelNotFoundException
      */
-    static function getConfig($extra)
+    static function getConfig(int $id)
     {
-        $result =  TopKuaidi100ConfigModel::where(['extra' => $extra])->find();
-        $result ['config_text'] = unserialize($result['config_text']);
+        $result =  TopKuaidi100ConfigModel::where(['extra' => $id])->find();
+        $result ['config'] = unserialize($result['config_text']);
         $result ['printer'] =  unserialize($result['printer_info']);
         return $result;
     }
