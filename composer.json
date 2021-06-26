@@ -15,5 +15,12 @@
             "name": "jhz-code",
             "email": "zhuok520@qq.com"
         }
-    ]
+    ],
+    "extra": {
+        "think": {
+            "services": [
+                "RmTop\\RmKuaidi100\\RmKuaidi100Service"
+            ]
+        }
+    }
 }
