@@ -19,7 +19,7 @@ class TopSign
      */
    static function create_sign($params,string $t,string $appKey,string $appSecret): string
     {
-        return strtoupper(md5($params.$t.$appKey.$appSecret));
+        return strtoupper(md5(json_encode($params).$t.$appKey.$appSecret));
     }
 
 
@@ -41,7 +41,7 @@ class TopSign
      */
     static function acceptSign($param,$salt): string
     {
-    return md5($param.$salt);
+    return md5(json_encode($param).$salt);
    }
 
 
