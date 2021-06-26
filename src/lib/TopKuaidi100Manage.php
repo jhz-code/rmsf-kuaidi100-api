@@ -4,6 +4,7 @@
 namespace RmTop\RmKuaidi100\lib;
 
 
+use http\Exception;
 use RmTop\RmKuaidi100\model\TopKuaidi100ConfigModel;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
@@ -136,10 +137,15 @@ class TopKuaidi100Manage
      */
     static function getConfig(int $id)
     {
-        $result =  TopKuaidi100ConfigModel::where(['extra' => $id])->find();
-        $result ['config'] = unserialize($result['config_text']);
-        $result ['printer'] =  unserialize($result['printer_info']);
-        return $result;
+        $result =  TopKuaidi100ConfigModel::where(['id' => $id])->find();
+        if($result){
+            $result ['config'] = unserialize($result['config_text']);
+            $result ['printer'] =  unserialize($result['printer_info']);
+            return $result;
+        }else{
+            throw new \think\Exception('当前配置不存在');
+        }
+
     }
     //------------------------------------------打印机管理--------------------------------------
 
