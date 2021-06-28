@@ -21,7 +21,7 @@ php think migrate:run
 ### 打印机配置：
 
 ~~~
-     //添加打印机
+     //添加打印
      * @param $extra //筛选标识符 打印机归属 自定义用户ID
      * @param string $title //打印机名称
      * @param array $printer_info  //打印机详细信息 
@@ -56,7 +56,6 @@ php think migrate:run
     
    //** 获取单台打印机信息以及配置
        TopKuaidi100Manage::getConfig(int $id)
-
      
 ~~~
 
