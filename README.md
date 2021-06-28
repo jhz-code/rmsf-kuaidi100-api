@@ -1,6 +1,64 @@
 # rmsf-kuaidi100-api
 快递100云打印 
 
+安装插件:
+~~~
+composer require rmtop/rmsf-kuaidi100-api
+~~~
+
+
+创建配置文件以及数据库模型:
+~~~
+//发布文件
+php think  rmtop:publish_kuaidi_100  
+
+//执行数据迁移
+php think migrate:run  
+
+~~~
+
+
+### 打印机配置：
+
+~~~
+     //创建打印机配置
+     * @param $extra //筛选标识符 打印机归属 自定义用户ID
+     * @param string $title //打印机名称
+     * @param array $printer_info  //打印机详细信息 
+     * @param array $config  //快递100 接口密钥配置信息
+     * @return TopKuaidi100ConfigModel|Model
+     
+    TopKuaidi100Manage::addConfig('customerId','测试打印机',['siid'=>'KX100L2XXX'],[
+           'appKey'=>'XXX',
+           'appSecret'=>'208b1e9f13XXXXXXXX',
+           'customer'=>'4509808DDDXXXXXXXXX',
+           'userid'=>'8b8b2edb8XXXXXXX',
+           'auto'=>'BlXXXXXXXX',
+      ]);
+    
+     /**
+     *打印机配置信息修改
+     * 更新配置
+     * @param $id
+     * @param string $title  //打印机名称
+     * @param string $extra //筛选标识符 打印机归属 自定义用户ID
+     * @param array $printer_info //打印机详细信息 
+     * @param array $config //快递100 接口密钥配置信息
+     * @return TopKuaidi100ConfigModel
+     */ 
+    TopKuaidi100Manage::editConfig($id,string $title, string $extra,  array  $printer_info,array $config)
+    
+    //删除配置信息
+    TopKuaidi100Manage::deleteConfig($id)
+    
+    //** 获取某个标识下的打印机列表  返回数组
+    TopKuaidi100Manage::getPrinterList(string $extra)
+    
+   //** 获取单台打印机信息以及配置
+       TopKuaidi100Manage::getConfig(int $id)
+
+     
+~~~
 
 
 ### 打印面单例子:

@@ -147,6 +147,28 @@ class TopKuaidi100Manage
         }
 
     }
+
+
+    /**
+     * 获取某个标识符下的打印机列表
+     * @param string $extra
+     * @return array|\think\Collection
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     */
+    function getPrinterList(string $extra){
+        $result =  TopKuaidi100ConfigModel::where(['extra' => $extra])->select();
+        foreach ($result as $key=>$value){
+            $result[$key]['config'] = unserialize($value['config_text']);
+            $result[$key]['printer'] =  unserialize($value['printer_info']);
+        }
+        return $result;
+    }
+
+
+
+
     //------------------------------------------打印机管理--------------------------------------
 
 
