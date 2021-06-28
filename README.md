@@ -21,7 +21,7 @@ php think migrate:run
 ### 打印机配置：
 
 ~~~
-     //创建打印机配置
+     //添加打印机
      * @param $extra //筛选标识符 打印机归属 自定义用户ID
      * @param string $title //打印机名称
      * @param array $printer_info  //打印机详细信息 
