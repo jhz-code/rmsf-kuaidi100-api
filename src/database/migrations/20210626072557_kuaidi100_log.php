@@ -92,7 +92,7 @@ class Kuaidi100Log extends Migrator
             ->addColumn('order_id', 'string', ['limit' => 100,'default'=>'','comment'=>'贵司内部自定义的订单编号,需要保证唯一性，非必填'])
             ->addColumn('salt', 'string', ['limit' => 80,'default'=>'','comment'=>'加密盐值'])
             ->addColumn('siid', 'string', ['limit' =>80,'default'=>'','comment'=>'打印机设备码'])
-            ->addColumn('state', 'integer', ['limit' => 1,'default'=>'0','comment'=>'打印状态 1成功'])
+            ->addColumn('state', 'integer', ['limit' => 1,'default'=>1,'comment'=>'打印状态 1成功'])
             ->addColumn('create_time', 'string', ['limit' => 20,'default'=>'0','comment'=>''])
             ->addColumn('update_time', 'string', ['limit' => 20,'default'=>'0','comment'=>''])
             ->create();
