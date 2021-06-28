@@ -64,8 +64,14 @@ php think migrate:run
 
 ~~~
 
+     //获取打印机的配置ID时，先根据用户标识符获取旗下的打印机列表，然后根据打印机的configId来获取打印机详情，进行打印
+
+
     function test(){
-        $client = new TopKuaidi100(1);
+       
+       $arr =  TopKuaidi100Manage::getPrinterList(string $extra)
+    
+        $client = new TopKuaidi100($arr[0][id]);
         $param = array (
             'type' => '10',                    //业务类型，默认为10
             'partnerId' => 'K5xxxxx',                 //电子面单客户账户或月结账号
