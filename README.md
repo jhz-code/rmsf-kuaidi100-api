@@ -118,3 +118,8 @@ function printerState(){
 }
 
 ~~~
+
+
+
+### 快递100 参数说明
+https://api.kuaidi100.com/document/5f0ff6adbc8da837cbd8aef8.html
