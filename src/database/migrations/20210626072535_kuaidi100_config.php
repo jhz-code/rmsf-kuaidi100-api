@@ -91,8 +91,8 @@ class Kuaidi100Config extends Migrator
         $table->addColumn('title', 'string', ['limit' =>80,'default'=>'0','comment'=>'打印机名称'])
             ->addColumn('config_text', 'string', ['limit' => 200,'default'=>'','comment'=>'配置'])
             ->addColumn('printer_info', 'string', ['limit' => 250,'default'=>'','comment'=>'打印机信息'])
-            ->addColumn('state', 'integral', ['limit' => 1,'default'=>'','comment'=>'打印机状态 1 开启'])
-            ->addColumn('isonline', 'integral', ['limit' => 1,'default'=>'','comment'=>'打印机状态 1 在线'])
+            ->addColumn('state', 'integer', ['limit' => 1,'default'=>'','comment'=>'打印机状态 1 开启'])
+            ->addColumn('isonline', 'integer', ['limit' => 1,'default'=>'','comment'=>'打印机状态 1 在线'])
             ->addColumn('extra', 'string', ['limit' => 50,'default'=>'','comment'=>'打印机额外配置数据'])
             ->create();
     }
